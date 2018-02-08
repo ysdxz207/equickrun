@@ -1,6 +1,7 @@
 html,body {
     margin: 0px;
     padding: 0px;
+    font-family: '新宋体';
 }
 .main ul {
     padding-left: 0px;
@@ -8,8 +9,11 @@ html,body {
 
 .main ul li {
     list-style: none;
+    cursor: pointer;
 }
 
 .main ul li:hover {
     background-color: #a0ffbf;
+    font-weight: 600;
+    color: #FFFFFF;
 }
