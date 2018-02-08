@@ -5,6 +5,8 @@ const app = electron.app
 const globalShortcut = electron.globalShortcut
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow
+const Tray = electron.Tray
+const Menu = electron.Menu
 
 const path = require('path')
 const url = require('url')
@@ -12,6 +14,7 @@ const url = require('url')
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
+let tray = null
 
 function registShortCut() {
 
@@ -33,6 +36,18 @@ function registShortCut() {
     if (globalShortcut.isRegistered('CommandOrControl+Shift+`')) {
         console.log('Shortcut registration sucess!')
     }
+}
+
+function registTray() {
+    tray = new Tray(path.join(__dirname, '/app/images/icon/icon.ico'))
+    const contextMenu = Menu.buildFromTemplate([
+        {label: 'Item1', type: 'normal'},
+        {label: 'Item2', type: 'normal'},
+        {label: '开机启动', type: 'radio', checked: true},
+        {label: '退出', type: 'normal'}
+    ])
+    tray.setToolTip('equickrun')
+    tray.setContextMenu(contextMenu)
 }
 
 function createWindow() {
@@ -70,6 +85,7 @@ function createWindow() {
 
     mainWindow.openDevTools()
     registShortCut()
+    registTray()
 }
 
 // This method will be called when Electron has finished
