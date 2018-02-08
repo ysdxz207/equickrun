@@ -1,0 +1,21 @@
+{
+  "name": "equickrun",
+  "version": "1.0.0",
+  "description": "equickrun",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "packager": "electron-packager ./ equickrun --platform=win32 --arch=x64 --out ./outApp --version 1.4.0 --overwrite --icon=./app/images/icon/icon.ico"
+  },
+  "repository": "",
+  "keywords": [
+    "equickrun",
+    "quickrun"
+  ],
+  "author": "GitHub",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "~1.7.8",
+    "electron-packager": "^11.0.0"
+  }
+}

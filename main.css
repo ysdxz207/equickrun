@@ -1,0 +1,16 @@
+html,body {
+    margin: 0px;
+    padding: 0px;
+}
+.main ul {
+    padding-left: 0px;
+}
+
+.main ul li {
+    list-style: none;
+}
+
+.main ul li:hover {
+    background-color: #a0ffbf;
+}
+

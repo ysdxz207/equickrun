@@ -1,0 +1,4 @@
+/.idea
+/outApp
+*.iml
+/node_modules
