@@ -3,8 +3,19 @@ html,body {
     padding: 0px;
     font-family: '新宋体';
 }
+.header {
+    height: 32px;
+    background-color: aqua;
+    cursor: move;
+}
+.main {
+    height: 800px;
+    width: 100%;
+    background-color: #ceffce;
+}
 .main ul {
     padding-left: 0px;
+    margin: 0px;
 }
 
 .main ul li {
@@ -13,7 +24,6 @@ html,body {
 }
 
 .main ul li:hover {
-    background-color: #a0ffbf;
-    font-weight: 600;
+    background-color: #6afb99;
     color: #FFFFFF;
 }
