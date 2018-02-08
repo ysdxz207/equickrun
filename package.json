@@ -7,12 +7,12 @@
     "start": "electron .",
     "packager": "electron-packager ./ equickrun --platform=win32 --arch=x64 --out ./outApp --version 1.4.0 --overwrite --icon=./app/images/icon/icon.ico"
   },
-  "repository": "",
+  "repository": "https://github.com/ysdxz207/equickrun.git",
   "keywords": [
     "equickrun",
     "quickrun"
   ],
-  "author": "GitHub",
+  "author": "Moses",
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "~1.7.8",
