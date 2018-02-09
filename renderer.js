@@ -2,7 +2,11 @@
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
 
-var header = document.querySelector('#header');
+var header = document.querySelector('.header');
+
+header.onmousedown = function (e) {
+    console.log(e.clientX,e.clientY)
+}
 
 header.onmousemove = function (e) {
     console.log(e.clientX,e.clientY)

@@ -16,6 +16,13 @@ html,body {
 .main ul {
     padding-left: 0px;
     margin: 0px;
+    /*禁止浏览器选择文本,防止双击选中文本*/
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .main ul li {
@@ -27,3 +34,5 @@ html,body {
     background-color: #6afb99;
     color: #FFFFFF;
 }
+
+
