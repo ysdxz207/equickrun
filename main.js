@@ -53,6 +53,7 @@ function registTray() {
 function createWindow() {
     // Create the browser window.
     mainWindow = new BrowserWindow({
+        id: 'window_equickrun',
         // width: 220,
         // height: 560,
         // frame: false,
