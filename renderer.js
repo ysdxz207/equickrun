@@ -3,7 +3,9 @@
 // All of the Node.js APIs are available in this process.
 
 const fs = require('fs');
+const filter = require('lodash.filter');
 const path = require('path')
+const exec = require('child_process').execFile;
 const windowsShortcuts = require('windows-shortcuts')
 const electron = require('electron')
 const remote = electron.remote
@@ -14,17 +16,23 @@ let header = document.querySelector('.header')
 let main = document.querySelector('.main')
 var mainul = document.querySelector('.main ul')
 
-const CONFIG_PATH = path.join(__dirname, '/app/conf/config')
+const CONFIG_PATH = path.join(__dirname, '/app/conf/config.json')
 
-// 载入配置
-let equickrunConfig = require(CONFIG_PATH)
+/*
+ * 配置 start
+ */
+let equickrunConfig = JSON.parse(fs.readFileSync(CONFIG_PATH).toString())
 
 appendToMainList(equickrunConfig.eshortcuts)
 
-//配置 end
+/*
+ * 配置 end
+ */
 
 
-//拖动窗口 start
+/*
+ * 拖动窗口 start
+ */
 let x = undefined,
     y = undefined
 
@@ -47,10 +55,14 @@ document.onmouseup = function () {
     x = undefined
     y = undefined
 }
-//拖动窗口 end
+/*
+ * 拖动窗口 end
+ */
 
 
-//拖放文件进列表 start
+/*
+ * 拖放文件进列表 start
+ */
 
 //阻止浏览器默认行。
 document.addEventListener('drop', function (e) {
@@ -78,6 +90,12 @@ function onDropFiles(e) {
         let file = fileList[i]
         let name = file.name
         let path = file.path
+
+        //检查是否已存在
+        if (checkEShortcutExists(name)) {
+
+            return
+        }
 
         eshortcut.id = process.hrtime().join('')
 
@@ -110,8 +128,9 @@ function onDropFiles(e) {
 function appendToMainList(eshortcutList) {
 
     if (!(eshortcutList instanceof Array)) {
-        eshortcutList = new Array()
-        eshortcutList.push(eshortcutList)
+        let tmp = new Array()
+        tmp.push(eshortcutList)
+        eshortcutList = tmp
     }
 
     for (let i = 0; i < eshortcutList.length; i ++) {
@@ -119,6 +138,11 @@ function appendToMainList(eshortcutList) {
         let li = document.createElement('li')
         li.setAttribute('id', eshortcut.id)
         li.innerHTML = eshortcut.name
+
+        li.addEventListener('click', function (e) {
+            run(eshortcut)
+        })
+
         mainul.appendChild(li)
     }
 }
@@ -131,12 +155,50 @@ function saveToConfig(eshortcut) {
     let eshortcutList = equickrunConfig.eshortcuts
     eshortcutList.push(eshortcut)
     equickrunConfig.eshortcuts = eshortcutList
-    fs.writeFile(CONFIG_PATH, equickrunConfig, {}, function (err) {
-            console.log(dialog.showOpenDialog({properties: ['openFile', 'openDirectory', 'multiSelections']}))
+    fs.writeFile(CONFIG_PATH, JSON.stringify(equickrunConfig, undefined, 4), {}, function (err) {
         if (err) {
+            dialog.showErrorBox('错误', '保存配置失败')
+        } else {
+
+            /*dialog.showMessageBox(mainWindow, {
+                type: 'info',
+                title: '提示',
+                message: '保存配置成功',
+                buttons: ['确定', '取消']
+            }, function (btnIndex) {
+                console.log(btnIndex)
+            })*/
         }
     })
 }
 
+function checkEShortcutExists(name) {
+    let eshortcut = filter(equickrunConfig.eshortcuts, x => x.name === name);
+    if (eshortcut) {
+        return true
+    }
+    return false
+}
+
+/*
+ * 拖放文件进列表 end
+ */
 
 
+/*
+ * 运行 start
+ */
+function run(eshortcut) {
+    exec(eshortcut.path, function(err, data) {
+        if(err){
+            console.error(err);
+            return;
+        }
+
+        console.log(data.toString());
+    })
+}
+
+/*
+ * 运行 end
+ */
