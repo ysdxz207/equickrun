@@ -2,23 +2,27 @@
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
 
+const fs = require('fs');
+const path = require('path')
+const windowsShortcuts = require('windows-shortcuts')
+const electron = require('electron')
+const remote = electron.remote
+const dialog = remote.dialog
+const mainWindow = remote.getCurrentWindow()
 
-// 载入配置文件
-let equickrunConfig = require('./app/conf/config');
+let header = document.querySelector('.header')
+let main = document.querySelector('.main')
+var mainul = document.querySelector('.main ul')
 
+const CONFIG_PATH = path.join(__dirname, '/app/conf/config')
 
+// 载入配置
+let equickrunConfig = require(CONFIG_PATH)
+
+appendToMainList(equickrunConfig.eshortcuts)
 
 //配置 end
 
-
-const windowsShortcuts = require('windows-shortcuts');
-const electron = require('electron')
-const remote = electron.remote
-const mainWindow = remote.getCurrentWindow()
-
-let header = document.querySelector('.header');
-let main = document.querySelector('.main');
-let mainul = document.querySelector('.main ul');
 
 //拖动窗口 start
 let x = undefined,
@@ -40,8 +44,8 @@ header.onmousemove = function (e) {
 }
 
 document.onmouseup = function () {
-    x = undefined;
-    y = undefined;
+    x = undefined
+    y = undefined
 }
 //拖动窗口 end
 
@@ -94,20 +98,45 @@ function onDropFiles(e) {
             eshortcut.workingDir = workingDir
             eshortcut.desc = desc
             list.push(eshortcut)
-            //添加到列表中
+            //显示在列表中
             appendToMainList(eshortcut)
+
+            //保存到配置
+            saveToConfig(eshortcut)
         })
     }
 }
 
-function appendToMainList(eshortcut) {
-    let li = document.createElement('li')
-    li.setAttribute('id', eshortcut.id)
-    li.innerHTML = eshortcut.name
-    mainul.appendChild(li)
+function appendToMainList(eshortcutList) {
 
-    //保存到配置
+    if (!(eshortcutList instanceof Array)) {
+        eshortcutList = new Array()
+        eshortcutList.push(eshortcutList)
+    }
 
+    for (let i = 0; i < eshortcutList.length; i ++) {
+        let eshortcut = eshortcutList[i]
+        let li = document.createElement('li')
+        li.setAttribute('id', eshortcut.id)
+        li.innerHTML = eshortcut.name
+        mainul.appendChild(li)
+    }
 }
+
+function saveToConfig(eshortcut) {
+    if (!eshortcut) {
+        return
+    }
+
+    let eshortcutList = equickrunConfig.eshortcuts
+    eshortcutList.push(eshortcut)
+    equickrunConfig.eshortcuts = eshortcutList
+    fs.writeFile(CONFIG_PATH, equickrunConfig, {}, function (err) {
+            console.log(dialog.showOpenDialog({properties: ['openFile', 'openDirectory', 'multiSelections']}))
+        if (err) {
+        }
+    })
+}
+
 
 
