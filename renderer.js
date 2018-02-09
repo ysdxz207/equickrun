@@ -173,8 +173,8 @@ function saveToConfig(eshortcut) {
 }
 
 function checkEShortcutExists(name) {
-    let eshortcut = filter(equickrunConfig.eshortcuts, x => x.name === name);
-    if (eshortcut) {
+    let result = filter(equickrunConfig.eshortcuts, x => x.name === name);
+    if (result.length > 0) {
         return true
     }
     return false
