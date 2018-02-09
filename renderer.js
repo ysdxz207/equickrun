@@ -5,7 +5,7 @@
 const fs = require('fs');
 const filter = require('lodash.filter');
 const path = require('path')
-const exec = require('child_process').execFile;
+const childProcess = require('child_process');
 const windowsShortcuts = require('windows-shortcuts')
 const electron = require('electron')
 const remote = electron.remote
@@ -189,13 +189,12 @@ function checkEShortcutExists(name) {
  * 运行 start
  */
 function run(eshortcut) {
-    exec(eshortcut.path, function(err, data) {
+    childProcess.exec('start ' + eshortcut.path, function(err, data) {
         if(err){
-            console.error(err);
+            dialog.showErrorBox('错误', '运行[' + eshortcut.name + ']失败了：' + err)
             return;
         }
-
-        console.log(data.toString());
+        // console.log(data.toString());
     })
 }
 

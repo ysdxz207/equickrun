@@ -3,45 +3,30 @@
     "startupShowDialog": true,
     "eshortcuts": [
         {
-            "id": "131973318935682",
-            "name": "quickrun-1.0-SNAPSHOT.jar - 快捷方式.lnk",
-            "path": "C:\\Users\\weishaoqiang\\Desktop\\quickrun-1.0-SNAPSHOT.jar - 快捷方式.lnk",
-            "target": "D:\\soft\\quickrun\\quickrun-1.0-SNAPSHOT.jar",
+            "id": "2430428143423599",
+            "name": "LamicPc.exe",
+            "path": "J:\\Hltx\\LamicPC\\LamicPc.exe"
+        },
+        {
+            "id": "2430948362373661",
+            "name": "feihong-json-format",
+            "path": "C:\\Users\\ysdxz207\\Desktop\\feihong-json-format"
+        },
+        {
+            "id": "243095256351369",
+            "name": "房子.txt",
+            "path": "C:\\Users\\ysdxz207\\Desktop\\房子.txt"
+        },
+        {
+            "id": "2431322892370505",
+            "name": "LamicPc.lnk",
+            "path": "C:\\Users\\Public\\Desktop\\LamicPc.lnk",
+            "target": "J:\\Hltx\\LamicPC\\LamicPc.exe",
             "icon": "",
             "args": "",
             "hotkey": 0,
-            "workingDir": "D:\\soft\\quickrun",
-            "desc": ""
-        },
-        {
-            "id": "1320080607399302",
-            "name": "微信图片_20180207160905.jpg",
-            "path": "C:\\Users\\weishaoqiang\\Desktop\\微信图片_20180207160905.jpg"
-        },
-        {
-            "id": "1320178495352923",
-            "name": "jmeter-2.9.zip",
-            "path": "C:\\Users\\weishaoqiang\\Desktop\\jmeter-2.9.zip"
-        },
-        {
-            "id": "1320307702372982",
-            "name": "富士冰山.txt",
-            "path": "C:\\Users\\weishaoqiang\\Desktop\\富士冰山.txt"
-        },
-        {
-            "id": "1320464537406751",
-            "name": "新建文本文档 (2).txt",
-            "path": "C:\\Users\\weishaoqiang\\Desktop\\新建文本文档 (2).txt"
-        },
-        {
-            "id": "1320601177367876",
-            "name": "pay",
-            "path": "C:\\Users\\weishaoqiang\\Desktop\\pay"
-        },
-        {
-            "id": "1322098466921458",
-            "name": "LamicPc.exe",
-            "path": "C:\\Program Files (x86)\\Hltx\\LamicPC\\LamicPc.exe"
+            "workingDir": "J:\\Hltx\\LamicPC\\",
+            "desc": "LamicPc.exe"
         }
     ]
 }
