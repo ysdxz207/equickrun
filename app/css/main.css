@@ -1,7 +1,13 @@
+@font-face{
+    font-family: '思源黑体';
+    src : url('../fonts/SourceHanSans-Normal.otf');
+}
+
 html,body {
     margin: 0px;
     padding: 0px;
-    font-family: '新宋体';
+    font-family: '思源黑体';
+    background-color: #ceffce;
 }
 .header {
     height: 32px;
@@ -9,9 +15,7 @@ html,body {
     cursor: move;
 }
 .main {
-    height: 800px;
     width: 100%;
-    background-color: #ceffce;
 }
 .main ul {
     padding-left: 0px;
@@ -28,9 +32,28 @@ html,body {
 .main ul li {
     list-style: none;
     cursor: pointer;
+    padding-left: 2px;
+
+    overflow: hidden;
+    -ms-text-overflow: ellipsis;/*省略号*/
+    text-overflow: ellipsis;/*省略号*/
+    display:block;
+    font-size:18px;
+    height:24px;
+    line-height:24px;
+    white-space:nowrap;/*强制不换行*/
 }
 
+.main ul li img {
+    height: 18px;
+}
+
+
 .main ul li:hover {
+    background-color: #6afb99;
+    color: #FFFFFF;
+}
+.selected {
     background-color: #6afb99;
     color: #FFFFFF;
 }

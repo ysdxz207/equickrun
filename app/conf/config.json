@@ -1,32 +1,5 @@
 {
     "startup": true,
-    "startupShowDialog": true,
-    "eshortcuts": [
-        {
-            "id": "2430428143423599",
-            "name": "LamicPc.exe",
-            "path": "J:\\Hltx\\LamicPC\\LamicPc.exe"
-        },
-        {
-            "id": "2430948362373661",
-            "name": "feihong-json-format",
-            "path": "C:\\Users\\ysdxz207\\Desktop\\feihong-json-format"
-        },
-        {
-            "id": "243095256351369",
-            "name": "房子.txt",
-            "path": "C:\\Users\\ysdxz207\\Desktop\\房子.txt"
-        },
-        {
-            "id": "2431322892370505",
-            "name": "LamicPc.lnk",
-            "path": "C:\\Users\\Public\\Desktop\\LamicPc.lnk",
-            "target": "J:\\Hltx\\LamicPC\\LamicPc.exe",
-            "icon": "",
-            "args": "",
-            "hotkey": 0,
-            "workingDir": "J:\\Hltx\\LamicPC\\",
-            "desc": "LamicPc.exe"
-        }
-    ]
+    "startupShowWindow": true,
+    "eshortcuts": []
 }

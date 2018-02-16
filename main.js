@@ -1,4 +1,7 @@
 const electron = require('electron')
+const AutoLaunch = require('auto-launch')
+const ConfigUtils = require('./app/js/ConfigUtils')
+
 
 // Module to control application life.
 const app = electron.app
@@ -15,6 +18,15 @@ const url = require('url')
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 let tray = null
+
+//开机启动
+var minecraftAutoLauncher = new AutoLaunch({
+    name: app.getName(),
+    path: app.getAppPath() + path.sep + app.getName() + '.exe'
+})
+
+
+toggleStartUp(ConfigUtils.equickrunConfig.startup)
 
 function registShortCut() {
 
@@ -39,30 +51,58 @@ function registShortCut() {
 }
 
 function registTray() {
+    //读取配置
+    let equickrunConfig = ConfigUtils.equickrunConfig
+
     tray = new Tray(path.join(__dirname, '/app/images/icon/icon.ico'))
     const contextMenu = Menu.buildFromTemplate([
-        {label: 'Item1', type: 'normal'},
-        {label: 'Item2', type: 'normal'},
-        {label: '开机启动', type: 'radio', checked: true},
-        {label: '退出', type: 'normal'}
+        {label: '关于', type: 'normal', click() {
+            require('electron').shell.openExternal('https://github.com/ysdxz207/equickrun.git')
+        }},
+        {label: '启动后打开主窗口', type: 'checkbox', checked: equickrunConfig['startupShowWindow'], click(menuItem) {
+            equickrunConfig['startupShowWindow'] = menuItem.checked
+            ConfigUtils.saveConfig(equickrunConfig, function () {
+            })
+        }},
+        {label: '开机启动', type: 'checkbox', checked: equickrunConfig['startup'], click(menuItem) {
+            equickrunConfig['startup'] = menuItem.checked
+            ConfigUtils.saveConfig(equickrunConfig, function () {
+                //处理开机启动项
+                toggleStartUp(menuItem.checked)
+            })
+        }},
+        {label: '退出', type: 'normal', click() {
+            app.quit()
+        }}
     ])
     tray.setToolTip('equickrun')
     tray.setContextMenu(contextMenu)
+
+    tray.on('click', function (e) {
+        //单击显示主窗体
+        if (mainWindow.isVisible()) {
+            mainWindow.hide()
+        } else {
+            mainWindow.show()
+        }
+    })
 }
 
 function createWindow() {
     // Create the browser window.
     mainWindow = new BrowserWindow({
         id: 'window_equickrun',
-        // width: 220,
-        // height: 560,
-        // frame: false,
-        width: 800,
-        height: 600,
+        width: 220,
+        height: 560,
+        // width: 800,
+        // height: 600,
+        frame: false,
         alwaysOnTop: true,
+        resizable: false,
+        show: ConfigUtils.equickrunConfig.startupShowWindow,
         webPreferences: {
 
-            devTools: true
+            devTools: false
         }
     })
 
@@ -87,6 +127,8 @@ function createWindow() {
     mainWindow.openDevTools()
     registShortCut()
     registTray()
+
+
 }
 
 // This method will be called when Electron has finished
@@ -122,3 +164,12 @@ app.on('will-quit', () => {
     // 清空所有快捷键
     globalShortcut.unregisterAll()
 })
+
+function toggleStartUp(startup) {
+
+    if (startup) {
+        minecraftAutoLauncher.enable();
+    } else {
+        minecraftAutoLauncher.disable();
+    }
+}

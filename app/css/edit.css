@@ -1,0 +1,65 @@
+html,body {
+    margin: 0px;
+    padding: 0px;
+    font-family: '新宋体';
+}
+
+.right {
+    float: right;
+}
+.edit {
+    padding: 8px 12px;
+}
+.edit-group {
+    margin: 6px 0px;
+}
+.edit-group label {
+    font-weight: 600;
+}
+.edit-group input {
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    font-size: 16px;
+    padding: 4px 8px;
+    width: 400px;
+}
+
+.edit-group input:focus {
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+}
+
+
+.button {
+    border: 0;
+    padding: 6px 8px;
+    font-size: 14px;
+    color: #FFFFFF;
+    margin: 4px;
+    cursor: pointer;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+}
+
+.btn-delete {
+    background-color: #f16757;
+}
+.btn-cancel {
+    background-color: #f1b56f;
+}
+
+.btn-save {
+    background-color: #6afb99;
+}
+
+.btn-choose-icon {
+    background-color: #9cfb0e;
+}
+
+.img-icon {
+    width: 24px;
+    height: 24px;
+}
