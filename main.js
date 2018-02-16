@@ -20,9 +20,9 @@ let mainWindow
 let tray = null
 
 //开机启动
-var minecraftAutoLauncher = new AutoLaunch({
+var eshortcutAutoLauncher = new AutoLaunch({
     name: app.getName(),
-    path: app.getAppPath() + path.sep + app.getName() + '.exe'
+    path: process.cwd() + path.sep + app.getName() + '.exe'
 })
 
 
@@ -128,7 +128,6 @@ function createWindow() {
     registShortCut()
     registTray()
 
-
 }
 
 // This method will be called when Electron has finished
@@ -167,9 +166,10 @@ app.on('will-quit', () => {
 
 function toggleStartUp(startup) {
 
+
     if (startup) {
-        minecraftAutoLauncher.enable();
+        eshortcutAutoLauncher.enable();
     } else {
-        minecraftAutoLauncher.disable();
+        eshortcutAutoLauncher.disable();
     }
 }
