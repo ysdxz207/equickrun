@@ -16,7 +16,6 @@ let targetObj = editMain.querySelector('input[name=target]')
 let argsObj = editMain.querySelector('input[name=args]')
 let imgIconObj = editMain.querySelector('img[name=icon]')
 
-let btnChooseIcon = editMain.querySelector('button.btn-choose-icon')
 
 let btnDelete = editMain.querySelector('button.btn-delete')
 let btnCancel = editMain.querySelector('button.btn-cancel')
@@ -44,6 +43,14 @@ electron.ipcRenderer.on('eshortcut', (event, paramaters) => {
     targetObj.value = target
     argsObj.value = args
     imgIconObj.setAttribute('src', icon)
+
+    if (!fs.existsSync(path)) {
+        pathObj.classList.add('path-not-exits')
+    }
+
+    if (!fs.existsSync(target)) {
+        targetObj.classList.add('target-not-exits')
+    }
 })
 
 
@@ -104,7 +111,7 @@ function bindEvents() {
         editWindow = null
     })
 
-    btnChooseIcon.addEventListener('click', function () {
+    imgIconObj.addEventListener('click', function () {
         dialog.showOpenDialog(editWindow, {
             title: '选择图标',
             properties: ['openFile'],

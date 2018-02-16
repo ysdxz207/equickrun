@@ -60,6 +60,15 @@ html,body {
 }
 
 .img-icon {
-    width: 24px;
     height: 24px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.path-not-exits {
+    background-color: #ffae73;
+}
+
+.target-not-exits {
+    background-color: #ff9185;
 }

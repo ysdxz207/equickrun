@@ -223,6 +223,12 @@ function appendToMainList(eshortcutList) {
             }
         })
 
+
+        if (!fs.existsSync(eshortcut.path)) {
+            liEle.classList.add('path-not-exits')
+        } else if (!fs.existsSync(eshortcut.target)) {
+            liEle.classList.add('target-not-exits')
+        }
         mainul.appendChild(liEle)
     }
 }
