@@ -1,0 +1,3 @@
+# equickrun
+
+electron版quickrun
