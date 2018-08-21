@@ -20,12 +20,10 @@ let header = document.querySelector('.header')
 let main = document.querySelector('.main')
 var mainul = document.querySelector('.main ul')
 
-const CONFIG_PATH = path.join(__dirname, '/app/conf/config.json')
-
 /*
  * 配置 start
  */
-let equickrunConfig = JSON.parse(fs.readFileSync(CONFIG_PATH).toString())
+let equickrunConfig = ConfigUtils.equickrunConfig
 
 appendToMainList(equickrunConfig.eshortcuts)
 

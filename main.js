@@ -92,9 +92,9 @@ function createWindow() {
     // Create the browser window.
     mainWindow = new BrowserWindow({
         id: 'window_equickrun',
-        width: 220,
+        // width: 220,
         height: 560,
-        // width: 800,
+        width: 800,
         // height: 600,
         frame: false,
         alwaysOnTop: true,
@@ -102,7 +102,7 @@ function createWindow() {
         show: ConfigUtils.equickrunConfig.startupShowWindow,
         webPreferences: {
 
-            devTools: false
+            devTools: true
         }
     })
 

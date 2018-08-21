@@ -1,10 +1,22 @@
+const electron = require('electron')
 const path = require('path')
 const fs = require('fs')
 
-const CONFIG_PATH = path.join(__dirname, '../conf/config.json')
+
+const userDataPath = (electron.app || electron.remote.app).getPath('home');
+const CONFIG_PATH = path.join(userDataPath, 'equickrun/conf.json');
 
 var ConfigUtils = {}
-ConfigUtils.equickrunConfig = JSON.parse(fs.readFileSync(CONFIG_PATH).toString())
+
+if (!fs.existsSync(CONFIG_PATH)) {
+    ConfigUtils.equickrunConfig = {
+        "startup": true,
+        "startupShowWindow": true,
+        "eshortcuts": []
+    }
+} else {
+    ConfigUtils.equickrunConfig = JSON.parse(fs.readFileSync(CONFIG_PATH).toString())
+}
 
 let equickrunConfig = ConfigUtils.equickrunConfig
 
@@ -35,7 +47,11 @@ ConfigUtils.saveToConfig = function (eshortcut) {
 ConfigUtils.saveConfig = function (equickrunConfig, callback) {
     fs.writeFile(CONFIG_PATH, JSON.stringify(equickrunConfig, undefined, 4), {}, function (err) {
         if (err) {
-            dialog.showErrorBox('错误', '保存配置失败')
+            dialog.showMessageBox(BrowserWindow, {
+                type: 'error',
+                title: '错误',
+                message: '保存配置失败'
+            })
         }
 
         if (callback) {
