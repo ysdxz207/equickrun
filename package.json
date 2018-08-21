@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "package": "electron-packager ./ equickrun --platform=win32 --arch=x64 --out ./outApp --version 1.4.0 --overwrite --icon=./app/images/icon/icon.ico --asar=true"
+    "package": "electron-packager ./ equickrun --platform=win32 --arch=x64 --out ./outApp --overwrite --executableName=equickrun --icon=./app/images/icon/icon.ico --asar"
   },
   "repository": "https://github.com/ysdxz207/equickrun.git",
   "keywords": [
@@ -15,18 +15,11 @@
   "author": "Moses",
   "license": "MIT",
   "devDependencies": {
-    "auto-launch": "^5.0.5",
-    "electron": "~1.7.8",
-    "electron-packager": "^11.0.0",
-    "lodash": "^4.6.0",
-    "lodash.filter": "^4.6.0",
-    "windows-shortcuts": "^0.1.6",
-    "step": "^1.0.0"
+    "electron-packager": "^12.1.1",
+    "electron": "~1.7.8"
   },
   "dependencies": {
     "auto-launch": "^5.0.5",
-    "electron": "~1.7.8",
-    "electron-packager": "^11.0.0",
     "lodash": "^4.6.0",
     "lodash.filter": "^4.6.0",
     "windows-shortcuts": "^0.1.6",
