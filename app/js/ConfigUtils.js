@@ -1,7 +1,6 @@
-const electron = require('electron')
+const {BrowserWindow, dialog, remote} = require('electron')
 const path = require('path')
 const fs = require('fs')
-
 
 const userDataPath = (electron.app || electron.remote.app).getPath('home');
 const CONFIG_PATH = path.join(userDataPath, 'equickrun/conf.json');
