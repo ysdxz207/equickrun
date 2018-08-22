@@ -1,9 +1,13 @@
-const {BrowserWindow, dialog, remote} = require('electron')
+//因为被主线程和render都引入过，需要用||选可用的
+const {dialog, remote, app} = require('electron')
 const path = require('path')
 const fs = require('fs')
 
-const userDataPath = (electron.app || electron.remote.app).getPath('home');
-const CONFIG_PATH = path.join(userDataPath, 'equickrun/conf.json');
+const currentWindow = remote ? remote.getCurrentWindow() : undefined
+const Dialog = (dialog || remote.dialog)
+const userDataPath = (app || remote.app).getPath('home')
+const CONFIG_DIR = path.join(userDataPath, 'equickrun')
+const CONFIG_PATH = path.join(CONFIG_DIR, 'conf.json')
 
 var ConfigUtils = {}
 
@@ -12,6 +16,10 @@ if (!fs.existsSync(CONFIG_PATH)) {
         "startup": true,
         "startupShowWindow": true,
         "eshortcuts": []
+    }
+    //创建目录
+    if (!fs.existsSync(CONFIG_DIR)) {
+        fs.mkdirSync(CONFIG_DIR)
     }
 } else {
     ConfigUtils.equickrunConfig = JSON.parse(fs.readFileSync(CONFIG_PATH).toString())
@@ -46,7 +54,7 @@ ConfigUtils.saveToConfig = function (eshortcut) {
 ConfigUtils.saveConfig = function (equickrunConfig, callback) {
     fs.writeFile(CONFIG_PATH, JSON.stringify(equickrunConfig, undefined, 4), {}, function (err) {
         if (err) {
-            dialog.showMessageBox(BrowserWindow, {
+            Dialog.showMessageBox(currentWindow, {
                 type: 'error',
                 title: '错误',
                 message: '保存配置失败'
